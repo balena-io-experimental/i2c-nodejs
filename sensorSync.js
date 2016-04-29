@@ -1,5 +1,6 @@
 var i2c = require('i2c-bus'),
   i2c1 = i2c.openSync(1);
+	console.log('i2c bus number: ' + process.env.I2C_BUS);
 
 var VCNL4000_ADDRESS = 0x13,
   VCNL4000_COMMAND = 0x80,
@@ -28,13 +29,24 @@ var VCNL4000_ADDRESS = 0x13,
 		console.log('no sensor found!!');
 	}
 	console.log('rev: ' + rev);
+	// Set the strength of IR LED
+	i2c1.writeByteSync(VCNL4000_ADDRESS, VCNL4000_IRLED, 5)// set to 5 * 10mA = 100mA
+
 	// Start Read for proximity data
 	i2c1.writeByteSync(VCNL4000_ADDRESS, VCNL4000_COMMAND, VCNL4000_MEASUREPROXIMITY)
 	// Wait while non volatile memory busy
 	while (!((i2c1.readByteSync(VCNL4000_ADDRESS, VCNL4000_COMMAND) - 0x80) & VCNL4000_PROXIMITYREADY)) {
 	}
-	h = i2c1.readWordSync(VCNL4000_ADDRESS,0x87)
-  console.log('proximity Data: ' + h);
+	prox = i2c1.readWordSync(VCNL4000_ADDRESS,VCNL4000_PROXIMITYDATA)
+  console.log('proximity Data: ' + prox);
+
+	// Start Read for proximity data
+	i2c1.writeByteSync(VCNL4000_ADDRESS, VCNL4000_COMMAND, VCNL4000_MEASUREAMBIENT)
+	// Wait while non volatile memory busy
+	while (!((i2c1.readByteSync(VCNL4000_ADDRESS, VCNL4000_COMMAND) - 0x80) & VCNL4000_AMBIENTREADY)) {
+	}
+	light = i2c1.readWordSync(VCNL4000_ADDRESS,VCNL4000_AMBIENTDATA)
+  console.log('light Data: ' + light);
 
   i2c1.closeSync();
 }());
