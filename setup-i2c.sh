@@ -9,8 +9,10 @@ if [[ "$DEVICE_TYPE" =~ "raspberrypi" ]]; then
 	modprobe i2c-dev
 	export I2C_BUS=1
 elif [[ "$DEVICE_TYPE" = "artik10" ]]; then
+	# Currently not working :/
 	export I2C_BUS=9
 elif [[ "$DEVICE_TYPE" = "artik10" ]]; then
+	# Currently not working :/
 	export I2C_BUS=7
 else
 	echo "Unable to detect device type!!!"

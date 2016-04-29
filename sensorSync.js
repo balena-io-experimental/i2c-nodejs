@@ -20,15 +20,15 @@ var VCNL4000_ADDRESS = 0x13,
   VCNL4000_AMBIENTREADY = 0x40,
   VCNL4000_PROXIMITYREADY = 0x20;
 
+var printData = function () {
 
-
-(function () {
 	// Check product ID of sensor
 	rev = i2c1.readByteSync(VCNL4000_ADDRESS, VCNL4000_PRODUCTID)
 	if(( rev & 0xF0)  !=0x10 ){
 		console.log('no sensor found!!');
 	}
 	console.log('rev: ' + rev);
+
 	// Set the strength of IR LED
 	i2c1.writeByteSync(VCNL4000_ADDRESS, VCNL4000_IRLED, 5)// set to 5 * 10mA = 100mA
 
@@ -38,15 +38,17 @@ var VCNL4000_ADDRESS = 0x13,
 	while (!((i2c1.readByteSync(VCNL4000_ADDRESS, VCNL4000_COMMAND) - 0x80) & VCNL4000_PROXIMITYREADY)) {
 	}
 	prox = i2c1.readWordSync(VCNL4000_ADDRESS,VCNL4000_PROXIMITYDATA)
-  console.log('proximity Data: ' + prox);
 
 	// Start Read for proximity data
 	i2c1.writeByteSync(VCNL4000_ADDRESS, VCNL4000_COMMAND, VCNL4000_MEASUREAMBIENT)
 	// Wait while non volatile memory busy
 	while (!((i2c1.readByteSync(VCNL4000_ADDRESS, VCNL4000_COMMAND) - 0x80) & VCNL4000_AMBIENTREADY)) {
 	}
-	light = i2c1.readWordSync(VCNL4000_ADDRESS,VCNL4000_AMBIENTDATA)
-  console.log('light Data: ' + light);
 
-  i2c1.closeSync();
-}());
+	light = i2c1.readWordSync(VCNL4000_ADDRESS,VCNL4000_AMBIENTDATA)
+
+  console.log('proximity Data: ' + prox +' and light Data: ' + light);
+
+}
+
+setInterval(printData, 3000);
