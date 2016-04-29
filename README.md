@@ -6,7 +6,7 @@ This is a simple node.js project that uses [i2c-bus](https://www.npmjs.com/packa
 
 To get this project up and running, you will need to signup for a resin.io account [here][signup-page] and set up a device, have a look at our [Getting Started tutorial][gettingStarted-link]. Once you are set up with resin.io, you will need to clone this repo locally:
 ```
-$ git clone git@github.com:resin-projects/simple-server-node.git
+$ git clone https://github.com/resin-io-playground/i2c-nodejs.git
 ```
 Then add your resin.io application's remote repository to your local repository:
 ```
@@ -17,7 +17,6 @@ and push the code to the newly added remote:
 $ git push resin master
 ```
 It should take a few minutes for the code to push.
-
 
 [resin-link]:https://resin.io/
 [signup-page]:https://dashboard.resin.io/signup
