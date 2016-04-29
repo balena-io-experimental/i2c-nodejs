@@ -19,5 +19,8 @@ else
 fi
 
 echo "detected $DEVICE_TYPE"
-#starts our node.js process
-node sensorSync.js
+#starts our node.js process which reads sensor values synchonously.
+#node sensorSync.js
+
+#Starts our async sensor read.
+node asyncReadSensor.js

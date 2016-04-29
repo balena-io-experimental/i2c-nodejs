@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/resin-io-projects/simple-server-node#readme",
   "dependencies": {
-    "express": "*",
+    "async": "*",
 		"i2c-bus": "1.0.3"
   }
 }
