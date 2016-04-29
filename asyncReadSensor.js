@@ -1,9 +1,9 @@
 var async = require('async'),
   i2c = require('i2c-bus'),
   i2c1;
-	console.log('i2c bus number: ' + process.env.I2C_BUS);
+console.log('i2c bus number: ' + process.env.I2C_BUS);
 
-var conf = require('./registers.json')
+var conf = require('./registers.json');
 
 (function () {
   async.series([
@@ -17,9 +17,9 @@ var conf = require('./registers.json')
     function (cb) {
       // Wait while non volatile memory busy
       (function read() {
-        i2c1.readByteSync(conf.ADDRESS, conf.COMMAND, function (err, config) {
+        i2c1.readByte(conf.ADDRESS, conf.COMMAND, function (err, config) {
           if (err) return cb(err);
-          if ((config - 0x80) & conf.PROXIMITYREADY) return read();
+          if (!((config - 0x80) & conf.PROXIMITYREADY)) return read();
           cb(null);
         });
       }());
