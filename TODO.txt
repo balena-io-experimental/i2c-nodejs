@@ -1,0 +1,3 @@
+Todo:
+
+* catch error from creating i2cbus object if `/dev/i2c-*` doesn't exist.
