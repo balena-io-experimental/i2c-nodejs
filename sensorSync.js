@@ -1,6 +1,7 @@
 var i2c = require('i2c-bus'),
-  i2c1 = i2c.openSync(1);
-	console.log('i2c bus number: ' + process.env.I2C_BUS);
+	busNumber = process.env.I2C_BUS,
+  i2c1 = i2c.openSync(busNumber);
+	console.log('i2c bus number: ' + busNumber);
 
 var conf = require('./registers.json')
 
