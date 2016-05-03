@@ -1,14 +1,15 @@
 var async = require('async'),
   i2c = require('i2c-bus'),
   i2c1;
-console.log('i2c bus number: ' + process.env.I2C_BUS);
+var busNumber = process.env.I2C_BUS;
+console.log('i2c bus number: ' + busNumber);
 
 var conf = require('./registers.json');
 
 (function () {
   async.series([
     function (cb) {
-      i2c1 = i2c.open(1, cb);
+      i2c1 = i2c.open(busNumber, cb);
     },
     function (cb) {
 			// Start Read for proximity data

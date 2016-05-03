@@ -13,6 +13,9 @@ elif [[ "$DEVICE_TYPE" = "odroid-c1" ]]; then
 	modprobe aml_i2c
 	export I2C_BUS=1
 elif [[ "$DEVICE_TYPE" = "beaglebone" ]]; then
+	# i2c0: Not exposed in the expansion headers
+	# i2c1: pins P9 17,18 (and 24,26)
+	# i2c2: pins P9 19,20 (and 21,22)
 	# load cape-universaln if you need i2c-1
 	#echo cape-universaln > /sys/devices/platform/bone_capemgr/slots
 	export I2C_BUS=2
@@ -31,4 +34,4 @@ echo "detected $DEVICE_TYPE"
 #node sensorSync.js
 
 #Starts our async sensor read.
-node asyncReadSensor.js
+node sensorSync.js
