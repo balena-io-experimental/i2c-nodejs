@@ -8,7 +8,7 @@ I2C_BUS=0 # Default i2c bus number
 if [[ "$DEVICE_TYPE" =~ "raspberrypi" ]]; then
 	modprobe i2c-dev
 	export I2C_BUS=1
-elif [[ "$DEVICE_TYPE" = "artik10" ]]; then
+elif [[ "$DEVICE_TYPE" = "artik5" ]]; then
 	# Currently not working :/
 	export I2C_BUS=9
 elif [[ "$DEVICE_TYPE" = "artik10" ]]; then
